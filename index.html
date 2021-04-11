@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+  <head>
+    <meta charset="utf-8">
+    <title>Лопни шарики</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+  	<link rel="stylesheet" href="css/animate.css">
+  	<link rel="stylesheet" href="css/style.css">
+  </head>
+
+  <body>
+    <header id = "header" class = "header">
+      <div class = "container">
+        <div class = "row">
+          <div class = "col-lg-12 title_logo" align = "center">
+            <div><img alt="" class = "logo" src = "img/Logo.png"></div>
+          </div>
+        </div>
+        <hr width = "30%" color = "white" />
+        <div class = "row">
+          <div class = "col-lg-12 title justify-content-center">
+            <h3 class = "title_game">Мини-игра</h3>
+            <h1 class = "title_name">ЛОПНИ &nbsp;ШАРИКИ</h1>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <section id = "task" class = "task">
+      <div class = "container task_bkg">
+       <div class = "row">
+         <div class = "col-lg-12">
+          <p class = "text_task"><b><big>Условие: </big></b>Снизу вверх с разной скоростью поднимаются шары разного размера и цвета.
+    Сверху иголка, которую игрок может двигать в левую или правую сторону.
+    Если кончик иголки упирается в поднимающийся шар, то шар лопается и засчитывается в текущий счёт.
+    Так же есть обратный таймер в 1 минуту. Это время за которое необходимо лопнуть максимальное количество шаров.
+    Постепенно шаров должно становиться больше и скорость их взлёта должна увеличиваться.
+    На шары произвольно может воздействовать ветер с левой или с правой стороны сдвигая поднимающиеся шары.
+    Чем дальше шар от стороны с которой дует ветер тем меньше на него воздействие. Так же шары не могут улетать за левую или правую границы.
+    После окончания таймера все текущие шары должны улететь за верхнюю границу экрана и после этого необходимо
+    показать количество пропущенных и лопнувших шаров.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id = "game" class = "game">
+      <div class = "container">
+        <div class = "row">
+          <div class = "col-lg-12 score_time">
+            <div class = "col-lg-3">
+              <h5 id = "score"></h5>
+            </div>
+            <div class = "col-lg-3">
+              <h5 id = "time"></h5>
+            </div>
+            <div class = "col-lg-3">
+              <h5 id = "missedBalls"></h5>
+            </div>
+            <div class = "col-lg-3">
+              <h5 id = "caughtBalls"></h5>
+            </div>
+          </div>
+        </div>
+        <div class = "row">
+          <div class = "col-lg-12 play_game justify-content-center">
+            <div id = "windLeft" class = "col-lg-1 wind">
+              <img alt="" id = "windImg" class = "wind_img1" src = "img/Wind.png" height="70px">
+              <h4 id = "windName"><b>Wind</b></h4>
+            </div>
+            <div class = "col-lg-10">
+              <div class = "row">
+                <div id = "screen">
+                  <div id = "spine"></div>
+                </div>
+              </div>
+              <div class = "row">
+                <div class = "col-lg-12 button_position">
+                  <div class = "col-lg-5 start" align = "center">
+                    <button id = "start_button" onclick="ballsGenerator()" class="start_button">Start</button>
+                  </div>
+                  <div class = "col-lg-7 left_right">
+                    <button class="spine_button" onmouseup="spineLeftEnd()" onmousedown="spineLeftStart()"><< Left</button>
+                    <button class="spine_button" onmouseup="spineRightEnd()" onmousedown="spineRightStart()">Right >></button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div id = "windRight" class = "col-lg-1 wind">
+              <img alt="" id = "windImg" class = "wind_img2" src = "img/Wind.png" height="70px">
+              <h4 id = "windName"><b>Wind</b></h4>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <script>
+//Зададим перемещение иглы при нажатии кнопки "Right>>"
+      var spinePosition = 5;//Определяет начальное положение иглы
+      var spineRight;
+      var spineElement = document.getElementById("spine");
+
+      //Срабатывает, когда кнопка мыши нажата и не отпущена
+      function spineRightStart()
+      {
+        spineRight = setInterval(positionElementRight, 10);
+      }
+
+      //Задаем движение иглы в пределах ширины экрана справа
+      function positionElementRight()
+      {
+        if(spinePosition <= 890)
+        {
+          spinePosition += 3;
+          spineElement.style.left = spinePosition + "px";
+        }
+      }
+
+      //Срабатывает, когда кнопка мыши отпущена
+      function spineRightEnd()
+      {
+        clearInterval(spineRight);
+      }
+
+
+//Зададим перемещение иглы при нажатии кнопки "<< Left"
+      var spineLeft;
+      //Срабатывает, когда кнопка мыши нажата и не отпущена
+      function spineLeftStart()
+      {
+        spineLeft = setInterval(positionElementLeft, 10);
+      }
+
+      //Задаем движение иглы в пределах ширины экрана слева
+      function positionElementLeft()
+      {
+        if(spinePosition >= 0)
+        {
+          spinePosition -= 3;
+          spineElement.style.left = spinePosition + "px";
+        }
+      }
+
+      //Срабатывает, когда кнопка мыши отпущена
+      function spineLeftEnd()
+      {
+        clearInterval(spineLeft);
+      }
+
+
+
+//Создаем метод для рандомного надувания шарика на нужную величину
+      function randomSize()
+      {
+        var ballSize = Math.ceil(Math.random()*(60 - 30 + 1)) + 30;
+        return ballSize;
+      }
+
+//Создаем метод для рандомной скорости полета шарика
+      var minSpeed = 3;
+      var maxSpeed = 10;
+      function randomSpeed()
+      {
+        var ballSpeed = (Math.ceil(Math.random()*(maxSpeed - minSpeed + 1)) + minSpeed)/10;
+        minSpeed += 0.3;//Наращиваем минимальную скорость
+        maxSpeed += 0.5;//Наращиваем максимальную скорость
+        return ballSpeed;
+      }
+
+//Создаем метод для рандомного месторасполажения шарика при запуске
+      function randomStartPosition()
+      {
+        var ballPosition = Math.ceil(Math.random()*850);
+        return ballPosition;
+      }
+
+//Метод создания нового шарика, выбора рандомного цвета, а также создадим новый элемент "balls" в котором будут создаваться все шарики
+      var ballCalc = 1;//Будет нужен для присвоения Id новому шарику
+      function newColorBall()
+      {
+        //Рандомный выбор цвета
+        var arrColor = ["ballRed", "ballYellow", "ballBlue", "ballGreen", "ballLightGreen", "ballPink", "ballAqua", "ballViolet"];
+        var randomNum = (Math.ceil(Math.random()*8))-1;
+
+        //В элементе "screen" создадим новый элемент "balls" в который будут добавляться все созданные шарики
+        var screenElement = document.getElementById("screen");
+        var newBallsParent = document.createElement("div");
+        newBallsParent.id = "balls";
+        screenElement.appendChild(newBallsParent);
+
+        //Создаем элемент шарик, присваиваем ему класс и Id
+        var newBallElement = document.createElement("div");
+        var parent = document.getElementById("balls");
+        parent.appendChild(newBallElement);
+        newBallElement.classList.add(arrColor[randomNum]);//Класс шарика будет обноименным с его цветом, который был выбран рандомно из общего массива цветов
+        newBallElement.id = arrColor[randomNum] + ballCalc;// Id для каждого шарика индивидуальный и будет состоять из названия его цвета + число(характеризующее каким по счёту он появился)
+
+        ballCalc += 1;
+
+        return newBallElement.id;// Значение Id шарика передаём в метод "ballStart()"
+      }
+
+
+
+//Зададим данные игры, которые будут отображаться на верхней панели информации
+      //Информация о счете
+      var gameScore = 0;
+      var score = document.getElementById("score");
+      score.innerHTML = "SCORE: &nbsp;&nbsp;0$";
+
+      //Информация о времени
+      var timer = document.getElementById("time");
+      timer.innerHTML = "TIME: &nbsp;&nbsp;1 min";
+
+      //Информация о пропущенных шарах
+      var gameMissedBalls = 0;
+      var missedBalls = document.getElementById("missedBalls");
+      missedBalls.innerHTML = "MISSED BALLS: &nbsp;&nbsp;0";
+
+      //Информация о пойманных шарах
+      var gameCaughtBalls = 0;
+      var caughtBalls = document.getElementById("caughtBalls");
+      caughtBalls.innerHTML = "CAUGHT BALLS: &nbsp;&nbsp;0";
+
+
+
+//Метод для запуска шарика
+      var windBlowSpeed = 0;//Сначала установим скорость ветра, воздействующую на шарик (если он подул)
+      function ballStart()
+      {
+        //Запускаем метод "newColorBall()", добываем из него Id созданного шарика и находим этот шарик по полученному Id
+        var idBall = newColorBall();
+        var newBall = document.getElementById(idBall);
+
+        //Устанавливаем параметры шарика: его месторасположение на экране и размер
+        var randomBallPosition = randomStartPosition();
+        newBall.style.left = randomBallPosition + "px";
+        newBall.style.height = randomSize() + "px";
+        newBall.style.width = newBall.style.height;
+
+        //Создадим метод проверки, попадает ли шарик на иголку или нет
+        function resultPosition()
+        {
+          var resultSpinePosition = 0;
+          for (var k = -300; k < 150; k++)
+          {
+            resultSpinePosition = spinePosition + k/10; //Нам нужны значения в диапазоне с точностью до десятичных
+            if (resultSpinePosition == randomBallPosition)
+            {
+              return true;//Шарик попадает на иголку
+            }
+          }
+          return false;//Шарик не попадает
+        }
+
+        //Устанавливаем необходимые параметры для шарика и запускаем его на экран
+        newBall.style.bottom = "0px";//Зададим начальное положение шарика внизу экрана
+        var position = 0;//Определяет на сколько пикселей шарик поднимается в каждое мгновение(зависит от значения "speed")
+        var speed = randomSpeed();
+
+        //Метод движения шарика
+        var t = setInterval(moveBall, 10);
+        function moveBall()
+        {
+          if (position >= 450)//Шарик улетел за экран (иголка не попала)
+          {
+            clearInterval(t);
+            newBall.parentNode.removeChild(newBall);//Шарик удаляется из игры
+
+            //На панели информации засчитывается новый пропущенный шар
+            gameMissedBalls += 1;
+            missedBalls.innerHTML = "MISSED BALLS: &nbsp;&nbsp;" + gameMissedBalls;
+          }
+          else if ((resultPosition() == true) && (position >= 380)) //Проверяем, попадает ли шарик на иголку или нет. Если попадает, то элемент с шариком сменяется на изображение заработанных очков "$"
+          {
+            //Создаем новый элемент "+$"
+            var newScoreElement = document.createElement("h3");
+            var newScore = document.createTextNode("+$");
+            newScoreElement.appendChild(newScore);
+
+            //Заменяем лопнувший шарик на значок "+$"
+            newBall.parentNode.replaceChild(newScoreElement, newBall);
+            newScoreElement.style.left = newBall.style.left;
+            newScoreElement.style.bottom = newBall.style.bottom;
+
+            newScoreElement.id = "idScore";
+            //Добавляем значку "+$" анимацию плавного затухания
+            newScoreElement.classList.add("animated");
+            newScoreElement.classList.add("fadeOut");
+
+            //Игроку засчитывается 30 очков
+            gameScore += 30;
+            score.innerHTML = "SCORE: &nbsp;&nbsp;" + gameScore + "$";
+
+            //Приплюсовываем шар к пойманным шарам
+            gameCaughtBalls += 1;
+            caughtBalls.innerHTML = "CAUGHT BALLS: &nbsp;&nbsp;" + gameCaughtBalls;
+          }
+          else//Если шарик не наткнулся на иглу и не улетел за экран, значит он сейчас просто летит. Зададим условия его полета
+          {
+            position += speed;//Определяет на сколько пикселей шарик поднимается в каждое мгновение
+            newBall.style.bottom = position + "px";
+
+            //Если будет дуть ветер, то положение шарика сместится еще и по горизонтали
+            if(windBlowSpeed != 0)
+            {
+              //Подул ветер слева
+              if(windBlowSpeed > 0)
+              {
+                if(randomBallPosition <= 300)//в этих пределах сила воздействия ветра на шарик максимальная
+                {
+                  randomBallPosition += windBlowSpeed;
+                  newBall.style.left = randomBallPosition + "px";
+                }
+                else if((randomBallPosition > 300) && (randomBallPosition < 600))//сила воздействия ветра на шарик стала чуть меньше
+                {
+                  randomBallPosition += (windBlowSpeed - 0.5);
+                  newBall.style.left = randomBallPosition + "px";
+                }
+                else if((randomBallPosition >= 600) && (randomBallPosition < 860))//сила воздействия ветра на шарик стала еще меньше
+                {
+                  randomBallPosition += (windBlowSpeed - 1);
+                  newBall.style.left = randomBallPosition + "px";
+                }
+                else//сила воздействия ветра на шарик полностью скомпенсировалась и шарик снова стал лететь ровно
+                {
+                  randomBallPosition += (windBlowSpeed - 1.5);
+                  newBall.style.left = randomBallPosition + "px";
+                }
+              }
+              //Подул ветер справа
+              if(windBlowSpeed < 0)
+              {
+                if(randomBallPosition >= 600)//в этих пределах сила воздействия ветра на шарик максимальная
+                {
+                  randomBallPosition += windBlowSpeed;
+                  newBall.style.left = randomBallPosition + "px";
+                }
+                else if((randomBallPosition < 600) && (randomBallPosition > 300))//сила воздействия ветра на шарик стала чуть меньше
+                {
+                  randomBallPosition += (windBlowSpeed + 0.5);
+                  newBall.style.left = randomBallPosition + "px";
+                }
+                else if((randomBallPosition <= 300) && (randomBallPosition > 0))//сила воздействия ветра на шарик стала еще меньше
+                {
+                  randomBallPosition += (windBlowSpeed + 1);
+                  newBall.style.left = randomBallPosition + "px";
+                }
+                else//сила воздействия ветра на шарик полностью скомпенсировалась и шарик снова стал лететь ровно
+                {
+                  randomBallPosition += (windBlowSpeed + 1.5);
+                  newBall.style.left = randomBallPosition + "px";
+                }
+              }
+            }
+          }
+        }
+      }
+
+
+//При старте игры значки по бокам, показывающие ветер, будут невидимы
+      var windLeft = document.getElementById("windLeft");
+      windLeft.style.opacity = "0%";
+
+      var windRight = document.getElementById("windRight");
+      windRight.style.opacity = "0%";
+
+//На шарик будет дуть вертер
+      function windBlow()
+      {
+        var randomWind = Math.ceil(Math.random()*2);//Сделаем рандомный выбор направления ветра (число 1 - ветер слева; число 2- ветер справа)
+
+        //Установим таймер, чтобы контролировать время воздействия ветра на шарик
+        var windTime = 0;//Счетчик времени позволяет отсчитывать секунды воздействия ветра на шарики
+        var windTimerSets = setInterval(tWind, 1000);
+
+        function tWind()
+        {
+          if(windTime == 0)//Начинает дуть ветер
+          {
+            if(randomWind == 1)//Ветер слева
+            {
+              windLeft.style.opacity = "100%";
+              windBlowSpeed = 1.5;
+            }
+            else//Ветер справа
+            {
+              windRight.style.opacity = "100%";
+              windBlowSpeed = -1.5;
+            }
+          }
+          if(windTime > 6)//Ветер может воздействовать на шарики в течение 6 секунд
+          {
+            //Значки по бокам, показывающие ветер, снова становятся невидимы
+            windLeft.style.opacity = "0%";
+            windRight.style.opacity = "0%";
+
+            windBlowSpeed = 0;//Обнуляем скорость ветра, воздействующую на шарик
+
+            clearInterval(windTimerSets);//останавливаем таймер
+            windTime = 0;//Возвращаем счётчик к исходному значению
+          }
+          windTime += 1;//Позволяет отсчитывать секунды воздействия ветра на шарики
+        }
+      }
+
+
+
+//Метод срабатывает при нажатии в игре на кнопку "Start"
+      function ballsGenerator()
+      {
+        var gameTime = 60;//Устанавливаем время игры = 60сек
+
+        if(gameTime == 60)//Если таймер находится на первоначальном значении равном 60 сек, значит игрок может начать играть
+        {
+          //Т.к. игрок мог до этого уже сыграть в игру, то перед тем как играть новую, все данные по предыдущей игре нужно обнулить
+          score.innerHTML = "SCORE: &nbsp;&nbsp;0$";
+          gameScore = 0;//Возвращаем счет к первоначальному значению
+          missedBalls.innerHTML = "MISSED BALLS: &nbsp;&nbsp;0";
+          gameMissedBalls = 0;//Возвращаем пропущенные шары к первоначальному значению
+          caughtBalls.innerHTML = "CAUGHT BALLS: &nbsp;&nbsp;0";
+          gameCaughtBalls = 0;//Возвращаем пойманные шары к первоначальному значению
+          minSpeed = 3;//Возвращаем минимальную скорость к первоначальному значению
+          maxSpeed = 5;//Возвращаем максимальную скорость к первоначальному значению
+
+          //Пока идёт игра, кнопка "Start" будет неактивна
+          var startButton = document.getElementById("start_button");
+          startButton.disabled = true;
+          startButton.style.opacity = "30%";
+
+          //Будем запускать шарики с постепенным ускорением между запусками
+          var interval = 3000;
+          var ballTimerSets;
+          function ballTimer()
+          {
+            interval -= 72.3;
+
+            ballTimerSets = setTimeout(ballTimer, interval);
+            ballStart();
+          }
+          ballTimer();
+
+          //Установим таймер, чтобы отсчитывать секунды игры
+          var timerSets = setInterval(seconds, 1000);
+          function seconds()
+          {
+            if(gameTime == 0)//Время игры вышло
+            {
+              clearInterval(timerSets);//останавливаем таймер
+              clearTimeout(ballTimerSets);//останавливаем шарики
+
+              //Кнопка "Start" становится активной
+              startButton.disabled = false;
+              startButton.style.opacity = "100%";
+            }
+            else//Отсчитываем секунды игры в обратном порядке
+            {
+              gameTime -= 1;
+              timer.innerHTML = "TIME: &nbsp;&nbsp;" + gameTime;//Оставшееся время игры показываем на панели информации
+
+              //Через определенные промежутки времени на шарик будет воздействовать вертер
+              if((gameTime == 50) || (gameTime == 38) || (gameTime == 26) || (gameTime == 14))
+              {
+                windBlow();
+              }
+            }
+          }
+        }
+      }
+    </script>
+
+    <footer id = "footer" class = "footer">
+      <div class = "container">
+        <div class = "row">
+          <div class = "col-lg-12 text_position">
+            <div class = "col-lg-6 footer_text1">
+              <img alt="" class = "iceCream" src = "img/iceCream.png">
+              <p><br>Мини-игра “Лопни шарики”
+              <br>JavaScript, HTML, CSS</p>
+            </div>
+            <div class = "col-lg-6 footer_text2">
+              <p><br>Чернятина Е.Д.
+              <br>Код игры на GitHub:</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

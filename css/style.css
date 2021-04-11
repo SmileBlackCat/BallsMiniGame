@@ -1,0 +1,250 @@
+html{
+  max-width: 1750px;
+  margin-left: auto;
+  margin-right: auto;
+  overflow-x: hidden;
+}
+header {
+  background: no-repeat url(../img/ImgHeader.png) fixed center top/cover;
+  height: 900px;
+}
+
+.title_name {
+  font-size: 90px;
+  font-weight: bold;
+  color: #fff;
+  margin-top: 30px;
+}
+
+.title_logo {
+  margin-top: 140px;
+  margin-bottom: 80px;
+}
+
+.logo{
+  height: 90px;
+}
+
+.title {
+  background-color: rgba(0, 0, 0, 0.4);
+  border: 1px solid #fff;
+  display: flex;
+  margin-top: 90px;
+  padding: 30px 0 30px 0;
+}
+
+.title_game {
+  font-style: italic;
+  color: #fff;
+}
+
+.task_bkg {
+  background: #fff;
+}
+
+.task {
+  padding: 15px;
+  border-top: 5px solid #fff;
+  background: #FCE8FF;
+  box-shadow: 0 -30px 150px #fff;
+}
+
+.text_task {
+  font-size: 14px;
+  width: 100%;
+}
+
+.score_time {
+  display: flex;
+  background-color: #000;
+  height: 66px;
+  color: white;
+  padding-top: 18px;
+  z-index: 2;
+}
+
+.game {
+  background: linear-gradient(to top, #B8FDC3, #E3FFDE, #FCE8FF);
+
+}
+
+.play_game {
+  background: linear-gradient(to top, #357886, #575F61);
+  height: 640px;
+  display: flex;
+}
+
+#screen {
+  background: url(../img/Background.png) center/cover;
+  height: 450px;
+  width: 100%;
+  border-left: 1px solid #16272B;
+  border-right: 1px solid #16272B;
+  border-bottom: 1px solid #16272B;
+  position: relative;
+}
+
+#spine {
+  width: 0;
+  height: 0;
+  border-top: 30px solid #000;
+  border-left: 15px solid transparent;
+  border-right: 15px solid transparent;
+  position: absolute;
+}
+
+#idScore {
+  position: absolute;
+  font-weight: bold;
+  color: orange;
+  z-index: 3;
+}
+
+.ballRed {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: red;
+  position: absolute;
+}
+
+.ballYellow {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: yellow;
+  position: absolute;
+}
+
+.ballGreen {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: green;
+  position: absolute;
+}
+
+.ballBlue {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: blue;
+  position: absolute;
+}
+
+.ballLightGreen {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: #9BFF6C;
+  position: absolute;
+}
+
+.ballPink {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: #FFC3EB;
+  position: absolute;
+}
+
+.ballAqua {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: aqua;
+  position: absolute;
+}
+
+.ballViolet {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: #DBAEFF;
+  position: absolute;
+}
+
+.wind {
+  margin-top: 180px;
+  color: white;
+  text-shadow: 0px 6px 3px #01B9D2;
+}
+.wind_img2 {
+  transform: scale(-1, 1);
+}
+
+.button_position {
+  display: flex;
+}
+
+.start_button {
+  background: linear-gradient(to top, #32A5BE, aqua);
+  border: 1px solid aqua;
+  border-radius: 50%;
+  color: #fff;
+  font-size: 27px;
+  font-weight: bold;
+  padding: 15px 80px 15px 80px;
+  margin-top: 12px;
+  margin-right: 60px;
+}
+
+.start_button:hover {
+	background: aqua;
+}
+
+.start_button:focus {
+  outline: none;
+	box-shadow: 0 0 10px #B4F6FF;
+}
+
+.spine_button {
+  background: linear-gradient(to top, #32A5BE, aqua);
+  border: 1px solid aqua;
+  border-radius: 50%;
+  color: #fff;
+  font-size: 20px;
+  font-weight: bold;
+  padding: 20px 80px 20px 80px;
+  margin-top: 12px;
+}
+
+.spine_button:hover {
+	background: aqua;
+}
+
+.spine_button:focus {
+  outline: none;
+	box-shadow: 0 0 10px #B4F6FF;
+}
+
+
+
+footer {
+  background: #232323;
+  height: 90px;
+}
+
+.text_position {
+  display: flex;
+  margin-top: 17px;
+}
+
+.footer_text1 {
+  display: flex;
+  color: #777777;
+  text-align: left;
+  font-style: italic;
+  font-size: 13px;
+}
+
+.iceCream {
+  height: 70px;
+}
+
+.footer_text2 {
+  color: #777777;
+  text-align: right;
+  font-style: italic;
+  font-size: 13px;
+}
