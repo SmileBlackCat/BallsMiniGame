@@ -242,6 +242,10 @@ footer {
   height: 70px;
 }
 
+a {
+  color: #777777;
+}
+
 .footer_text2 {
   color: #777777;
   text-align: right;
