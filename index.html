@@ -17,10 +17,10 @@
             <div><img alt="" class = "logo" src = "img/Logo.png"></div>
           </div>
         </div>
-        <hr width = "30%" color = "white" />
+        <hr width = "20%" color = "white" />
         <div class = "row">
           <div class = "col-lg-12 title justify-content-center">
-            <h3 class = "title_game">Мини-игра</h3>
+            <h5 class = "title_game">Мини-игра</h5>
             <h1 class = "title_name">ЛОПНИ &nbsp;ШАРИКИ</h1>
           </div>
         </div>
@@ -197,8 +197,8 @@
       function newColorBall()
       {
         //Рандомный выбор цвета
-        var arrColor = ["ballRed", "ballYellow", "ballBlue", "ballGreen", "ballLightGreen", "ballPink", "ballAqua", "ballViolet"];
-        var randomNum = (Math.ceil(Math.random()*8))-1;
+        var arrColor = ["ballBlack", "ballRed", "ballYellow", "ballBlue", "ballGreen", "ballLightGreen", "ballPink", "ballAqua", "ballViolet"];
+        var randomNum = (Math.ceil(Math.random()*9))-1;
 
         //В элементе "screen" создадим новый элемент "balls" в который будут добавляться все созданные шарики
         var screenElement = document.getElementById("screen");
@@ -492,13 +492,13 @@
         <div class = "row">
           <div class = "col-lg-12 text_position">
             <div class = "col-lg-6 footer_text1">
-              <img alt="" class = "iceCream" src = "img/iceCream.png">
+              <img alt="" class = "logo_footer" src = "img/Logo.png" height="30px">
               <p><br>Мини-игра “Лопни шарики”
               <br>JavaScript, HTML, CSS</p>
             </div>
             <div class = "col-lg-6 footer_text2">
               <p><br>Чернятина Е.Д.
-              <br>Код игры на GitHub: &nbsp;&nbsp;<a href="https://github.com/SmileBlackCat/BallsMiniGame">https://github.com/SmileBlackCat/BallsMiniGame</a></p>
+              <br>GitHub: &nbsp;&nbsp;<a href="https://github.com/SmileBlackCat/BallsMiniGame">https://github.com/SmileBlackCat/BallsMiniGame</a></p>
             </div>
           </div>
         </div>

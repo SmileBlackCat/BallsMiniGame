@@ -1,57 +1,54 @@
 html{
-  max-width: 1750px;
+  max-width: 1450px;
   margin-left: auto;
   margin-right: auto;
   overflow-x: hidden;
+  background: #000;
 }
-header {
-  background: no-repeat url(../img/ImgHeader.png) fixed center top/cover;
-  height: 900px;
+
+body {
+  background: #000;
 }
 
 .title_name {
-  font-size: 90px;
-  font-weight: bold;
-  color: #fff;
+  font-size: 70px;
+  font-weight: 100;
+  color: aqua;
   margin-top: 30px;
 }
 
 .title_logo {
-  margin-top: 140px;
-  margin-bottom: 80px;
+  margin-top: 30px;
+  margin-bottom: 30px;
 }
 
 .logo{
-  height: 90px;
+  height: 60px;
 }
 
 .title {
-  background-color: rgba(0, 0, 0, 0.4);
-  border: 1px solid #fff;
   display: flex;
-  margin-top: 90px;
-  padding: 30px 0 30px 0;
+  margin-top: 50px;
 }
 
 .title_game {
   font-style: italic;
-  color: #fff;
+  font-weight: 100;
+  color: aqua;
 }
 
 .task_bkg {
-  background: #fff;
+  background: #000;
 }
 
 .task {
-  padding: 15px;
-  border-top: 5px solid #fff;
-  background: #FCE8FF;
-  box-shadow: 0 -30px 150px #fff;
+  background: #000;
 }
 
 .text_task {
   font-size: 14px;
   width: 100%;
+  color: #D8D8D8;
 }
 
 .score_time {
@@ -63,24 +60,19 @@ header {
   z-index: 2;
 }
 
-.game {
-  background: linear-gradient(to top, #B8FDC3, #E3FFDE, #FCE8FF);
-
-}
-
 .play_game {
-  background: linear-gradient(to top, #357886, #575F61);
+  background: #000;
   height: 640px;
   display: flex;
 }
 
 #screen {
-  background: url(../img/Background.png) center/cover;
+  background: #fff;
   height: 450px;
   width: 100%;
-  border-left: 1px solid #16272B;
-  border-right: 1px solid #16272B;
-  border-bottom: 1px solid #16272B;
+  border-left: 1px solid #523B0E;
+  border-right: 1px solid #523B0E;
+  border-bottom: 1px solid #523B0E;
   position: relative;
 }
 
@@ -99,6 +91,15 @@ header {
   color: orange;
   z-index: 3;
 }
+
+.ballBlack {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: #000;
+  position: absolute;
+}
+
 
 .ballRed {
   width: 50px;
@@ -195,7 +196,7 @@ header {
 
 .start_button:focus {
   outline: none;
-	box-shadow: 0 0 10px #B4F6FF;
+	box-shadow: 0 0 10px aqua;
 }
 
 .spine_button {
@@ -215,13 +216,12 @@ header {
 
 .spine_button:focus {
   outline: none;
-	box-shadow: 0 0 10px #B4F6FF;
+	box-shadow: 0 0 10px aqua;
 }
 
 
 
 footer {
-  background: #232323;
   height: 90px;
 }
 
@@ -238,8 +238,8 @@ footer {
   font-size: 13px;
 }
 
-.iceCream {
-  height: 70px;
+.logo_footer {
+  margin: 20px 20px 0 0;
 }
 
 a {
